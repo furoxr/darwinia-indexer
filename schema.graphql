@@ -1,17 +1,38 @@
-# To improve query performance, we strongly suggest adding indexes to any field that you plan to filter or sort by
-# Add the `@index` or `@index(unique: true)` annotation after any non-key field
-# https://academy.subquery.network/build/graphql.html#indexing-by-non-primary-key-field
-
-"""This is an example entity"""
-type StarterEntity @entity {
-  """id is a required field"""
+type StakedEvent @entity {
   id: ID!
-  field1: Int!
+  timestamp: Date!
+  blockNumber: BigInt! @index
+  blockHash: String!
+  staker: String! @index
+  ringAmount: BigInt!
+  ktonAmount: BigInt!
+  deposits: [BigInt]
+}
 
-  field2: String #filed2 is an optional field
-  field3: BigInt
+type UnstakedEvent @entity {
+  id: ID!
+  timestamp: Date!
+  blockNumber: BigInt! @index
+  blockHash: String!
+  staker: String! @index
+  ringAmount: BigInt!
+  ktonAmount: BigInt!
+  deposits: [BigInt]
+}
 
-  field4: Date
+type PayoutEvent @entity {
+  id: ID!
+  timestamp: Date!
+  blockNumber: BigInt! @index
+  blockHash: String!
+  staker: String! @index
+  ringAmount: BigInt!
+}
 
-  field5: Boolean
+type ElectedEvent @entity {
+  id: ID!
+  timestamp: Date!
+  blockNumber: BigInt! @index
+  blockHash: String!
+  collators: [String]
 }
